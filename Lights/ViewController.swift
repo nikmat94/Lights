@@ -25,38 +25,33 @@ class ViewController: UIViewController {
         greenView.layer.cornerRadius = 70
         startButton.layer.cornerRadius = 20
     }
+    enum color {
+        case off
+        case red
+        case yellow
+        case green
+    }
+    
+    var startPosition = color.off
     @IBAction func startButtonPressed() {
         startButton.setTitle("Next", for: .normal)
         
-        if redView.alpha == 0.3,
-           yellowView.alpha == 0.3,
-           greenView.alpha == 0.3 {
-                redView.alpha = 1
-            return
-            }
-        if redView.alpha != 0.3,
-           yellowView.alpha == 0.3,
-           greenView.alpha == 0.3 {
-                redView.alpha = 0.3
-                yellowView.alpha = 1
-            return
-            }
-        if redView.alpha == 0.3,
-           yellowView.alpha != 0.3,
-           greenView.alpha == 0.3 {
-                yellowView.alpha = 0.3
-                greenView.alpha = 1
-            return
-            }
-        if redView.alpha == 0.3,
-           yellowView.alpha == 0.3,
-           greenView.alpha != 0.3 {
-                greenView.alpha = 0.3
-                redView.alpha = 1
-            return
-            }
-    
+        switch startPosition {
+        case .off:
+            redView.alpha = 1
+            startPosition = .red
+        case .red:
+            redView.alpha = 0.3
+            yellowView.alpha = 1
+            startPosition = .yellow
+        case .yellow:
+            yellowView.alpha = 0.3
+            greenView.alpha = 1
+            startPosition = .green
+        case .green:
+            greenView.alpha = 0.3
+            redView.alpha = 1
+            startPosition = .red
         }
+    }
 }
-
-
